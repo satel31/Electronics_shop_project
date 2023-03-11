@@ -5,7 +5,7 @@ class Item:
     """
     Класс для представления товара в магазине.
     """
-    CSV_FILE = "../src/items.csv"
+    CSV_FILE = "../electronics-shop-project_s/src/items.csv"
     pay_rate = 1.0
     all = []
 
