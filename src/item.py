@@ -29,7 +29,7 @@ class Item:
         return self.__name
 
     @name.setter
-    def name(self, new_name: str):
+    def name(self, new_name: str) -> None:
         """Задаёт новое наименование товара"""
         if len(new_name) <= 10:
             self.__name = new_name
@@ -52,7 +52,7 @@ class Item:
         self.price *= self.pay_rate
 
     @classmethod
-    def instantiate_from_csv(cls):
+    def instantiate_from_csv(cls) -> None:
         """Инициализирует экземпляры класса Item данными из файла src/items.csv"""
         with open(cls.CSV_FILE) as file:
             file_dict = csv.DictReader(file, delimiter=',')
@@ -61,8 +61,15 @@ class Item:
 
     @staticmethod
     def string_to_number(value: str) -> int:
+        """Преобразует число типа str в int"""
         if '.' in value:
             s = value.split('.')
             return int(s[0])
         else:
             return int(value)
+
+    def __repr__(self) -> str:
+        return f"Item('{self.name}', {self.price}, {self.quantity})"
+
+    def __str__(self) -> str:
+        return f"{self.name}"
