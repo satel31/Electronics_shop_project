@@ -5,7 +5,7 @@ class Item:
     """
     Класс для представления товара в магазине.
     """
-    CSV_FILE = "../electronics-shop-project_s/src/items.csv"
+    CSV_FILE = "../src/items.csv"
     pay_rate = 1.0
     all = []
 
@@ -54,7 +54,7 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls) -> None:
         """Инициализирует экземпляры класса Item данными из файла src/items.csv"""
-        with open(cls.CSV_FILE) as file:
+        with open(cls.CSV_FILE, encoding='windows-1251') as file:
             file_dict = csv.DictReader(file, delimiter=',')
             for line in file_dict:
                 Item(line['name'], line['price'], line['quantity'])
