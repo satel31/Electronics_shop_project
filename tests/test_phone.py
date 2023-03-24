@@ -26,10 +26,8 @@ def test_phone_new_number_of_sim():
 
 def test_phone_new_number_of_sim_zero(iphone):
     """Test of the change of the number_of_sim to zero"""
-    try:
+    with pytest.raises(ValueError, match="Количество физических SIM-карт должно быть целым числом больше нуля"):
         iphone.number_of_sim = 0
-    except ValueError:
-        pytest.xfail("Количество физических SIM-карт должно быть целым числом больше нуля")
 
 def test_phone_add(iphone):
     """Test of the addition Phone and Item"""
