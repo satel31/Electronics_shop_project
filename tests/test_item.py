@@ -26,12 +26,15 @@ def test_item_name(laptop):
     """Test of the method name"""
     assert laptop.name == 'Ноутбук'
 
+def test_item_new_name():
+    """Test of the change of the name"""
+    item = Item("Ноут", 20000, 5)
+    item.name = 'Смартфон'
+    assert item.name == 'Смартфон'
 def test_item_name_more_than_ten(laptop):
     """Test of the item name with length greater than 10 signs"""
-    try:
-        Item.name == "СуперСмартфон"
-    except Exception:
-        pytest.fail("Длина наименования товара превышает 10 символов")
+    with pytest.raises(Exception, match="Длина наименования товара превышает 10 символов"):
+        laptop.name = "01234567890"
 
 def test_item_name_less_than_ten(laptop):
     """Test of the item name with length less than 10 signs"""
