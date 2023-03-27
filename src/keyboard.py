@@ -2,16 +2,16 @@ from src.item import Item
 
 class MixinKL:
     """Дополнительный функционал по хранению и изменению раскладки клавиатуры"""
-    def __init__(self):
-        self._language = 'EN'
+    def __init__(self) -> None:
+        self._language: str = 'EN'
 
     def change_lang(self):
         """Меняет раскладку клавиатуры
            Возвращает self с новой раскладкой (для прохождения теста kb.change_lang().change_lang())"""
         if self._language == 'EN':
-            self._language = 'RU'
+            self._language: str = 'RU'
         elif self._language == 'RU':
-            self._language = 'EN'
+            self._language: str = 'EN'
         return self
 
 
@@ -28,8 +28,9 @@ class KeyBoard(Item, MixinKL):
         :param language: язык клавиатуры
         """
         super().__init__(name, price, quantity)
-        self._language = 'EN'
+        self._language: str = 'EN'
 
     @property
-    def language(self):
+    def language(self) -> str:
+        """Return the language"""
         return self._language
