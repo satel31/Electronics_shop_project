@@ -61,6 +61,8 @@ class Item:
                 for line in file_dict:
                     if len(line) != 3:
                         raise InstantiateCSVError('Файл item.csv поврежден')
+                    elif '' in line.keys() or '' in line.values():
+                        raise InstantiateCSVError('Файл item.csv поврежден')
                     else:
                         Item(line['name'], line['price'], line['quantity'])
         except FileNotFoundError:
