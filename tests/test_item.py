@@ -1,5 +1,6 @@
 import pytest
 from src.item import Item
+from src.exception_class import InstantiateCSVError
 
 
 @pytest.fixture
@@ -43,11 +44,33 @@ def test_item_name_less_than_ten(laptop):
     Item.name = 'Ноутбук'
     assert Item.name == 'Ноутбук'
 
-def test_item_instantiate_from_csv():
+def test_item_instantiate_from_csv_good():
     """Test  of the method instantiate_from_csv"""
     Item.all.clear()
     Item.instantiate_from_csv()
     assert len(Item.all) == 5
+
+def test_item_instantiate_from_csv_no_file():
+    """Test  of the method instantiate_from_csv with no file"""
+    Item.all.clear()
+    Item.CSV_FILE = "../src/items2.csv"
+    with pytest.raises(FileNotFoundError, match="Отсутствует файл item.csv"):
+        Item.instantiate_from_csv()
+
+def test_item_instantiate_from_csv_broken_file():
+    """Test  of the method instantiate_from_csv with a broken csv file"""
+    Item.all.clear()
+    Item.CSV_FILE = "../tests/items_test.csv"
+    with pytest.raises(InstantiateCSVError, match="Файл item.csv поврежден"):
+        Item.instantiate_from_csv()
+
+
+def test_item_instantiate_from_csv_broken_file_2():
+    """Test  of the method instantiate_from_csv with a broken csv file"""
+    Item.all.clear()
+    Item.CSV_FILE = "../tests/items_test_2.csv"
+    with pytest.raises(InstantiateCSVError, match="Файл item.csv поврежден"):
+        Item.instantiate_from_csv()
 
 def test_item_string_to_number():
     """Test  of the method string_to_number"""
